@@ -11,13 +11,20 @@
 | 1294_S1_L008_R4_001.fastq.gz | read2 |
 
 2. Per-base NT distribution
-    1. Use markdown to insert your 4 histograms here.
-    2. For quality scores of indexes, if a single base in the sequence has a qscore less than or equal to 12, then consider it low quality. Using a qscore of 12 as the cutoff would mean there must be a 94% - 95% chance that each and every base call is correct for it to be used for sample identification. For quality scores of the reads, the standard for average qscore cutoff seems to be 30, meaning the average probability that the bases are correct must be 99.9% for it to be analyzed downstream.
-    3. For the index1 reads, 3976613 of the 363246735 (1.095%) total index1 sequences have at least 1 N. For index2 reads, 3328051 (0.9162%) have at least 1 N.
+    1. ![Index1 Mean Qscore Distribution](1294_S1_L008_R2_001-qscore_distr.png)
+Format: ![Index1 Mean Qscore Distribution](png)
+![Index2 Mean Qscore Distribution](1294_S1_L008_R3_001-qscore_distr.png)
+Format: ![Index2 Mean Qscore Distribution](png)
+![Read1 Mean Qscore Distribution](1294_S1_L008_R1_001-qscore_distr.png)
+Format: ![Read1 Mean Qscore Distribution](png)
+![Read2 Mean Qscore Distribution](1294_S1_L008_R4_001-qscore_distr.png)
+Format: ![Read2 Mean Qscore Distribution](png)
+    2. For quality scores of indexes, if a single base in the sequence has a qscore less than 20, then consider it low quality. Using a qscore of 20 as the cutoff would mean there must be a 99% probability that each and every base call is correct for it to be used for sample identification. For quality scores of the reads, the standard cutoff seems to be an average qscore of 30 across the read, meaning the average probability that the read has the correct bases must be 99.9% for it to be analyzed downstream.
+    3. 7304664 indexes (1.005%) from both index1 and index2 reads have at least 1 N. 
     ```
-    $ /usr/bin/time -v zcat 1294_S1_L008_R2_001.fastq.gz | sed -n '2~4p' | grep -E '[N]+' | wc -l
-    $ /usr/bin/time -v zcat 1294_S1_L008_R3_001.fastq.gz | sed -n '2~4p' | grep -E '[N]+' | wc -l
-    ```
+    $ zcat 1294_S1_L008_R[2,3]_001.fastq.gz | sed -n '2~4p' | grep -c 'N'
+    ````
+
 
 ## Part 2
 1. Define the problem
