@@ -1,0 +1,135 @@
+- instructions in step like form -
+ output one R1 FASTQ file and one R4 FASTQ file per matching index-pair - 48 files
+ another two FASTQ files for non-matching index-pairs (index-hopping)
+ and two additional FASTQ files when one or both index reads are unknown or low quality
+    (do not match the 24 known indexes (this includes indexes with 'N's in them) or do not meet a quality score cutoff)
+ add the sequence of the index-pair to the header of BOTH reads in all of your FASTQ files for all categories 
+    (e.g. add “AAAAAAAA-CCCCCCCC” to the end of headers of every read pair that had an index1 of AAAAAAAA and an index2 of CCCCCCCC; this pair of reads would be in the unknown category as one or both of these indexes doesn’t match the 24 known indexes).
+ report the number of read-pairs with properly matched indexes (per index-pair),
+    the number of read pairs with index-hopping observed,
+    the number of read-pairs with unknown index(es).
+    values for each possible pair of indexes - both swapped and dual matched.
+
+
+incorporate sample, treatment, etc info into naming the matched index output files
+output raw numbers of different categories and the percentages of the total number of records
+
+
+- code -
+
+shebang to specify python to run this script
+
+modules that will need to be imported:
+    argparse
+    gzip
+    re
+    itertools
+
+def get_args():
+    ''' obtain input names/paths of input files from the command line '''
+    • add argument specifications for the items listed above
+
+    return the function
+•input from command line: names of files
+•expected: able to store and use the file names
+
+use argparse to store
+    name of file with index info
+    name of R1 file
+    name of R2 file
+    name of R3 file
+    name of R4 file
+
+
+extract and store indexes from indexes.txt file
+    store indexes in dictionary where keys are seq of index, values are other info from indexes file
+
+make dictionary of all index combos using itertools (specifically permutations)
+    keys are the permutations combo, values are the count
+
+# functions
+def get_revcomp(sequence):
+    ''' Takes a nucleotide sequence and returns the the reverse complement '''
+    • iterate over the sequence
+        if the nucleotide is A,
+            replace with T
+        else-if the nucleotide is T,
+            replace with A
+        else-if the nucleotide is C,
+            replace with G
+        else-if the nucleotide is G,
+            replace with C
+    • reverse the replaced/complemented string
+    return revcomp
+•input: ATTGC
+•expected: GCAAT
+
+
+def calc_qscore(phred):
+    ''' Takes a single phred ascii character and returns the integer quality score,
+    only phred 33 '''
+    • use ord function to convert the ascii character to number
+    • subtract 33 to get the quality score
+    return qscore
+•input: #
+•expected: 2
+
+
+def make_matched_filenames(indexdictionary):
+    ''' Takes a dictionary where keys are the index sequence and values are experimental info for that index
+    and returns a list of file names"
+    • initialize empty list to hold file names
+    • for each index (key) in the index dictionary:
+        • use information in the value to generate 2 file names - 1 fwd (read1), 1 rev (read2)
+        • add the file names to the list
+    return matched_filenames
+•input: {'AGTC':['control','A1'], 'GCGA':['treatm1', 'B2']}
+•expected: ['read1_control_A1.fastq', 'read2_control_A1.fastq', 'read1_treatm1_B2.fastq', 'read2_treatm1_B2.fastq']
+
+initialize counter for unknown and low quality reads
+
+open 53 files for writing to
+    iterate over the created matched_filenames to create the 48 matched files
+    2 index hopped - 1 fwd, 1 rev
+    2 unknown/low qual - 1 fwd, 1 rev
+    1 for output stats
+
+open all 4 read files (R1, R2, R3, R4) for reading in
+
+set line counter to 0
+set record counter to 0
+initialize 4 empty lists for holding a single record from each read file
+simultaneously read and store a single record from each file in the respective record list (strip newline characters from each line)
+    for each line read, add 1 to line counter
+    after each full record add 1 to record counter
+
+for each set of records:
+    • extract index1 sequence from the record2 list
+    • extract index2 sequence from the record3
+        take reverse complement of index2 using function and store
+    
+    add index1 seq and index2 seq to the header line of stored read1 and read2 (R4) records
+
+    1) if index1 AND rev comp index2 are in the keys of the indexes dictionary:
+        • calculate the qscores for the index1 and index2 sequences
+       otherwise:
+        • write read1 record to fwd unknown/low qual file
+        • write read2 (R4) to rev unknown/low qual file
+        • add 1 to unknown/low qual counter
+    2) if any base in index1 or index2 sequences has qscore less than 20:
+        • write read1 record to fwd unknown/low qual file
+        • write read2 (R4) to rev unknown/low qual file
+        • add 1 to unknown/low qual counter
+    3) otherwise if the individual qscores for index1 AND index2 are 20 or above:
+        4) and if the seqence of index1 is the same as the rev comp index2 seq:
+            • write read1 record to fwd index file
+            • write read2 (R4) record to rev index file
+            • add 1 to dictionary counter where the key is index,index
+          otherwise:
+            • write read1 record to fwd index hopped file
+            • write read2 (R4) to rev index hopped file
+            • add 1 to dictionary counter where the key is index1,rev comp index2
+
+write permutations count dictionary and unknown/low quality count out to output stats file in nice format
+
+close all files!
