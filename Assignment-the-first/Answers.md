@@ -12,13 +12,13 @@
 
 2. Per-base NT distribution
     1. ![Index1 Mean Qscore Distribution](1294_S1_L008_R2_001-qscore_distr.png)
-Format: ![Index1 Mean Qscore Distribution](png)
+Format: ![Index1 Mean Qscore Distribution](url)
 ![Index2 Mean Qscore Distribution](1294_S1_L008_R3_001-qscore_distr.png)
-Format: ![Index2 Mean Qscore Distribution](png)
+Format: ![Index2 Mean Qscore Distribution](url)
 ![Read1 Mean Qscore Distribution](1294_S1_L008_R1_001-qscore_distr.png)
-Format: ![Read1 Mean Qscore Distribution](png)
+Format: ![Read1 Mean Qscore Distribution](url)
 ![Read2 Mean Qscore Distribution](1294_S1_L008_R4_001-qscore_distr.png)
-Format: ![Read2 Mean Qscore Distribution](png)
+Format: ![Read2 Mean Qscore Distribution](url)
     2. For quality scores of indexes, if a single base in the sequence has a qscore less than 20, then consider it low quality. Using a qscore of 20 as the cutoff would mean there must be a 99% probability that each and every base call is correct for it to be used for sample identification. For quality scores of the reads, the standard cutoff seems to be an average qscore of 30 across the read, meaning the average probability that the read has the correct bases must be 99.9% for it to be analyzed downstream.
     3. 7304664 indexes (1.005%) from both index1 and index2 reads have at least 1 N. 
     ```
