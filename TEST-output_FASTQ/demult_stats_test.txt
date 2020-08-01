@@ -1,0 +1,24 @@
+properly matched indexes: 25%
+index ID	index sequence	number of matched pairs
+A1	ACTTC	0
+B2	TACAG	0
+C3	TTCCT	0
+D4	GGCAT	1
+
+hoped indexes: 25%
+index ID combinations	index combination	number of pairs
+A1-B2	ACTTC-TACAG	0
+A1-C3	ACTTC-TTCCT	0
+A1-D4	ACTTC-GGCAT	0
+B2-A1	TACAG-ACTTC	0
+B2-C3	TACAG-TTCCT	0
+B2-D4	TACAG-GGCAT	0
+C3-A1	TTCCT-ACTTC	0
+C3-B2	TTCCT-TACAG	1
+C3-D4	TTCCT-GGCAT	0
+D4-A1	GGCAT-ACTTC	0
+D4-B2	GGCAT-TACAG	0
+D4-C3	GGCAT-TTCCT	0
+
+number of pairs with unknown or low quality indexes: 2
+percent of pairs with unknown or low quality indexes: 50%
