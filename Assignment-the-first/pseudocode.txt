@@ -10,9 +10,13 @@
     the number of read-pairs with unknown index(es).
     values for each possible pair of indexes - both swapped and dual matched.
 
-
-incorporate sample, treatment, etc info into naming the matched index output files
-output raw numbers of different categories and the percentages of the total number of records
+- output -
+ want to incorporate sample, treatment, etc info into naming the matched index output files
+ output into stats.txt file raw numbers of different categories and the percentages of the total number of records
+ 48 matched pair fastq files - 24 fwd 24 rev
+ 2 fastq files for non-matching index-pairs - 1 fwd, 1 reverse
+ 2 fastq files when one or both index reads are unknown or low quality - 1 fwd, 1 rev
+ 1 plain text file with summary info
 
 
 - code -
