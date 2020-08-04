@@ -33,7 +33,6 @@
 | 34	| 4H	| both	| 2.4 |
 
 
-
 ### Output Files ###
 12619558_demult.txt (job number)
 - printed contexts of dictionary containing index info and confirmed all files are closed at the end
@@ -45,3 +44,7 @@ summary_output_S1_L008.txt
 indexcombos_counts_S1_L008.tsv
 - tab separated table with the counts for every possible combination of indexes, including matches
 
+zipped output fastq files can be found on Talapas at 
+```
+/projects/bgmp/kroth/bioinfo/Bi622/demultiplexing/assignm_third/run3-success/
+```
