@@ -1,5 +1,5 @@
 sample	group	treatment	index	index sequence
 1	2A	control	A1	ACTTC
 2	2B	treatm1	B2	TACAG
-3	2B	treatm2	C3	TTCCT
-4	2C	treatm3	D4	GGCAT
+3	2C	treatm2	C3	TTCCT
+4	2D	treatm3	D4	GGCAT
