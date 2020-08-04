@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --partition=bgmp        ### Partition (like a queue in PBS)
+#SBATCH --job-name=demult_KR      ### Job Name
+#SBATCH --output=%j_demult_run1.txt        ### File in which to store job output
+#SBATCH --error=%j_demult_run1.err          ### File in which to store job error messages
+#SBATCH --time=3-00:00:00       ### Wall clock time limit in Days-HH:MM:SS
+#SBATCH --nodes=1               ### Number of nodes needed for the job
+#SBATCH --account=bgmp          ### Account used for job submission
+
+
+conda activate bgmp_py37
+/usr/bin/time -v \
+./demultiplexing.py \
+-i /projects/bgmp/shared/2017_sequencing/indexes.txt \
+-a /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R1_001.fastq.gz \
+-b /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz \
+-c /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz \
+-d /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R4_001.fastq.gz
+/usr/bin/time -v gzip *.fq

@@ -1,0 +1,46 @@
+	Command being timed: "./demultiplexing.py -i /projects/bgmp/shared/2017_sequencing/indexes.txt -a /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R1_001.fastq.gz -b /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz -c /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz -d /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R4_001.fastq.gz"
+	User time (seconds): 5284.50
+	System time (seconds): 69.19
+	Percent of CPU this job got: 98%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:30:28
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 126420
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 2766868
+	Voluntary context switches: 114462
+	Involuntary context switches: 18522
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+	Command being timed: "gzip A10_28_4D_mbnl_S1_L008_read1.fq A10_28_4D_mbnl_S1_L008_read2.fq A11_11_2H_both_S1_L008_read1.fq A11_11_2H_both_S1_L008_read2.fq A1_16_3D_mbnl_S1_L008_read1.fq A1_16_3D_mbnl_S1_L008_read2.fq A12_22_3H_both_S1_L008_read1.fq A12_22_3H_both_S1_L008_read2.fq A2_24_4A_control_S1_L008_read1.fq A2_24_4A_control_S1_L008_read2.fq A3_19_3F_fox_S1_L008_read1.fq A3_19_3F_fox_S1_L008_read2.fq A5_2_2B_control_S1_L008_read1.fq A5_2_2B_control_S1_L008_read2.fq A7_31_4F_fox_S1_L008_read1.fq A7_31_4F_fox_S1_L008_read2.fq A8_34_4H_both_S1_L008_read1.fq A8_34_4H_both_S1_L008_read2.fq B10_32_4G_both_S1_L008_read1.fq B10_32_4G_both_S1_L008_read2.fq B1_1_2A_control_S1_L008_read1.fq B1_1_2A_control_S1_L008_read2.fq B2_15_3C_mbnl_S1_L008_read1.fq B2_15_3C_mbnl_S1_L008_read2.fq B3_8_2F_fox_S1_L008_read1.fq B3_8_2F_fox_S1_L008_read2.fq B4_21_3G_both_S1_L008_read1.fq B4_21_3G_both_S1_L008_read2.fq B7_17_3E_fox_S1_L008_read1.fq B7_17_3E_fox_S1_L008_read2.fq B8_29_4E_fox_S1_L008_read1.fq B8_29_4E_fox_S1_L008_read2.fq B9_4_2C_mbnl_S1_L008_read1.fq B9_4_2C_mbnl_S1_L008_read2.fq C10_23_4A_control_S1_L008_read1.fq C10_23_4A_control_S1_L008_read2.fq C1_3_2B_control_S1_L008_read1.fq C1_3_2B_control_S1_L008_read2.fq C2_27_4C_mbnl_S1_L008_read1.fq C2_27_4C_mbnl_S1_L008_read2.fq C3_7_2E_fox_S1_L008_read1.fq C3_7_2E_fox_S1_L008_read2.fq C4_10_2G_both_S1_L008_read1.fq C4_10_2G_both_S1_L008_read2.fq C7_14_3B_control_S1_L008_read1.fq C7_14_3B_control_S1_L008_read2.fq C9_6_2D_mbnl_S1_L008_read1.fq C9_6_2D_mbnl_S1_L008_read2.fq index-hopped_S1_L008_read1.fq index-hopped_S1_L008_read2.fq unkn_lowqual_S1_L008_read1.fq unkn_lowqual_S1_L008_read2.fq"
+	User time (seconds): 18047.28
+	System time (seconds): 53.99
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 5:03:07
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 896
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 25597
+	Voluntary context switches: 35691
+	Involuntary context switches: 68711
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
