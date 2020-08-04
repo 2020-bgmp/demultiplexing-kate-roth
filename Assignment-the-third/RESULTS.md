@@ -1,7 +1,7 @@
 # Demultiplexing and Index Swapping - Results #
 ### Total number of records: 363246735 ###
 ### Matched Pairs: 331755033,  91.3% ###
-### Uknown or Low Quality Pairs: 30783962, 8.5% ###
+### Unknown or Low Quality Pairs (if any base has qscore < 30): 30783962, 8.5% ###
 ### Index-hopped Pairs: 707740, 0.2% ###
 
 ### Percentage of Matched Reads from Each Sample ###
