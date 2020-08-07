@@ -8,9 +8,9 @@ import re
 
 def get_args():
     '''get names/paths of input files from the command line'''
-    parser = argparse.ArgumentParser(description="A program to get names/paths of input files from the command line")
+    parser = argparse.ArgumentParser(description="A program to demultiplex Illuminia samples with matched paired indexes. The default quality cutoff is qscore of at least 30 for every index base pair")
     parser.add_argument("-i", "--indexesfile", help="tab separated text file with index information", required=True, type=str)
-    parser.add_argument("-q", "--qscore", help="index qscore cutoff (per individual base pair", default=30, type=int)
+    parser.add_argument("-q", "--qscore", help="index qscore cutoff (per individual base pair)", default=30, type=int)
     parser.add_argument("-a", "--a", help="R1 (read1) fastq file", required=True, type=str)
     parser.add_argument("-b", "--b", help="R2 (index1) fastq file", required=True, type=str)
     parser.add_argument("-c", "--c", help="R3 (index2) fastq file", required=True, type=str)
@@ -185,50 +185,43 @@ for line in zip(R1file,R2file,R3file,R4file):
         record_R4[0] = record_R4[0] + ";" + index1_seq + "-" + revcompl_index2_seq
         # print(record_R1, record_R2, record_R3, record_R4, '\n', sep='\n')
 
-        if index1_seq in indexes_dict.keys():      # both need to match the given indexes to proceed
-            if revcompl_index2_seq in indexes_dict.keys():
-                good1 = check_qscore(index1_seq)
-                good2 = check_qscore(revcompl_index2_seq)
-                if good1 and good2:
-                    # if both indexes are known, good qual, and match each other, write to the appropriate matched files and incrememnt specific dictionary counter and general counter
-                    if index1_seq == revcompl_index2_seq:
-                        # recreate keys to look up and write to appropriate file in the abbr
-                        index_key1 = index1_seq + 'read1'
-                        index_key2 = index1_seq + 'read2'
-                        for l_r1 in record_R1:
-                            open_files_dict[index_key1].write(l_r1 + '\n')
-                        for l_r4 in record_R4:
-                            open_files_dict[index_key2].write(l_r4 + '\n')
-                        # recreate tuple key to look up and increment correct counter
-                        search_key = (index1_seq, index1_seq)
-                        permut_count_dict[search_key]+=1
-                        properly_matched_count+=1
+        if index1_seq in indexes_dict.keys() and revcompl_index2_seq in indexes_dict.keys():      # both need to match the given indexes to proceed
+            good1 = check_qscore(index1_seq)
+            good2 = check_qscore(revcompl_index2_seq)
+            if good1 and good2:
+                # if both indexes are known, good qual, and match each other, write to the appropriate matched files and incrememnt specific dictionary counter and general counter
+                if index1_seq == revcompl_index2_seq:
+                    # recreate keys to look up and write to appropriate file in the matched_filenames
+                    index_key1 = index1_seq + 'read1'
+                    index_key2 = index1_seq + 'read2'
+                    for l_r1 in record_R1:
+                        open_files_dict[index_key1].write(l_r1 + '\n')
+                    for l_r4 in record_R4:
+                        open_files_dict[index_key2].write(l_r4 + '\n')
+                    # recreate tuple key to look up and increment correct counter
+                    search_key = (index1_seq, index1_seq)
+                    permut_count_dict[search_key]+=1
+                    properly_matched_count+=1
 
-                    # if both index seqs are known and good qual but are not the same, write to index hopped files and increment specific dictionary counter and general counter
-                    else:
-                        for l_r1 in record_R1:
-                            hopped_read1.write(l_r1 + '\n')
-                        for l_r4 in record_R4:
-                            hopped_read2.write(l_r4 + '\n')
-                        # recreate tuple key to look up and increment correct counter
-                        search_key = (index1_seq,revcompl_index2_seq)
-                        permut_count_dict[search_key]+=1
-                        hopped_general_count+=1
-
-                # if a single base pair in either index read > 30, write to uknown/lowqual files and increment counter
+                # if both index seqs are known and good qual but are not the same, write to index hopped files and increment specific dictionary counter and general counter
                 else:
                     for l_r1 in record_R1:
-                        unkn_lowqual_read1.write(l_r1 + '\n')
+                        hopped_read1.write(l_r1 + '\n')
                     for l_r4 in record_R4:
-                        unkn_lowqual_read2.write(l_r4 + '\n')
-                    unkn_lowq_count+=1
-            # if either index seq unknown, write to unknown/lowqual files and increment counter
+                        hopped_read2.write(l_r4 + '\n')
+                    # recreate tuple key to look up and increment correct counter
+                    search_key = (index1_seq,revcompl_index2_seq)
+                    permut_count_dict[search_key]+=1
+                    hopped_general_count+=1
+
+            # if a single base pair in either index read > 30, write to uknown/lowqual files and increment counter
             else:
                 for l_r1 in record_R1:
                     unkn_lowqual_read1.write(l_r1 + '\n')
                 for l_r4 in record_R4:
                     unkn_lowqual_read2.write(l_r4 + '\n')
                 unkn_lowq_count+=1
+        
         # if either index seq unknown, write to unknown/lowqual files and increment counter
         else:
             for l_r1 in record_R1:
